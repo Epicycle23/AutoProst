@@ -17,29 +17,27 @@ local MaxProstVariationIndex = #ProstVariations
 local function OnGuildMessageProst()
     SendChatMessage(ProstVariations[math.random(0,MaxProstVariationIndex)],"GUILD")
 end
-local GuildMessageHandlers = {
-    ["prost!"] = OnGuildMessageProst,
-}
-
 
 
 local AutoProstEventFrame = CreateFrame("Frame", "AutoProstEventFrame")
-
+local PlayerNamePattern = nil
+local function GetPlayerNamePattern()
+    if(PlayerNamePattern == nil) then
+        local name = UnitName("player")
+        PlayerNamePattern = "^"..name.."-" -- no x realm guilds so...
+    end
+    return PlayerNamePattern
+end
 local function OnEvent(self, event, ...)
     if (event == "CHAT_MSG_GUILD") then
         local message, sender = ...
-        if(sender == UnitName("player")) then
+        if(string.match(sender, GetPlayerNamePattern())) then
             do return end
         end
         local lowerMessage = string.lower(message)
-        local handler = GuildMessageHandlers[lowerMessage]
-        if(handler) then
-            handler()
-        else
-            if(string.match(lowerMessage, "^prost *!*$")) then
-                OnGuildMessageProst()
-            end 
-        end
+        if(string.match(lowerMessage, "^prost *!*$")) then
+            OnGuildMessageProst()
+        end 
     end
 end
 
