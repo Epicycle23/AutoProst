@@ -13,7 +13,7 @@ local ProstVariations = {
     [11] = "Serefe!",
     [12] = "Yamas!",
 }
-
+local MaxProstVariationIndex = #ProstVariations
 local function OnGuildMessageProst()
     SendChatMessage(ProstVariations[math.random(0,MaxProstVariationIndex)],"GUILD")
 end
