@@ -26,9 +26,12 @@ local GuildMessageHandlers = {
 local AutoProstEventFrame = CreateFrame("Frame", "AutoProstEventFrame")
 
 local function OnEvent(self, event, ...)
-    local arg1, arg2 = ...
     if (event == "CHAT_MSG_GUILD") then
-        local lowerMessage = string.lower(arg1)
+        local message, sender = ...
+        if(sender == UnitName("player")) then
+            do return end
+        end
+        local lowerMessage = string.lower(message)
         local handler = GuildMessageHandlers[lowerMessage]
         if(handler) then
             handler()
