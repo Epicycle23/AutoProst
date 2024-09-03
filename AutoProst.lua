@@ -35,7 +35,7 @@ local function OnEvent(self, event, ...)
             do return end
         end
         local lowerMessage = string.lower(message)
-        if(string.match(lowerMessage, "^prost *!*$")) then
+        if(string.match(lowerMessage, "^[  ]*prost[  %!]*$")) then
             OnGuildMessageProst()
         end 
     end
