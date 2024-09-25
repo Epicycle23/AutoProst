@@ -1,5 +1,5 @@
-## Interface: 11503
-## Version: 1.0.2
+## Interface: 11504
+## Version: 1.0.3
 ## Title: Auto Prost
 ## Notes: Auto Prost
 ## Author: Epicycle
